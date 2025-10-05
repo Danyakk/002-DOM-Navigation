@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,11 +17,13 @@
             border: 1px solid black;
         }
 
-        td, th {
+        td,
+        th {
             padding: 8px;
         }
     </style>
 </head>
+
 <body>
     <table id="statsTable">
         <tr>
@@ -68,13 +71,31 @@
     <div id="result"></div>
 
     <script>
-        /*
-        Задание:
-        Добавьте строку "Итого" для таблицы statsTable. Напишите сценарий, которым выведите во вторую ячейку этой строки сумму всех числовых значений второй колонки.
-        Выведите в третью ячейку этой строки сумму всех числовых значений из третьей колонки таблицы.
-        В div с id result выведите сообщение "Отдел 1 сделал больше продаж" или "Отдел 2 сделал больше продаж" на основе раннее вычисленных значений в строке "Итого".
-        Используйте любые методы, которые были рассмотрены на в прошлых уроках.
-        */
+        let table = document.querySelector("#statsTable");
+        let rows = table.rows;
+
+        let row1 = 0;
+        let row2 = 0;
+
+        for (let i = 1; i < rows.length - 1; i++) {
+            let cells = rows[i].cells;
+            row1 += Number(cells[1].textContent);
+            row2 += Number(cells[2].textContent);
+        }
+
+        rows[rows.length - 1].cells[1].textContent = row1;
+        rows[rows.length - 1].cells[2].textContent = row2;
+
+        let resultAnswer = document.getElementById("result");
+        if (row1 > row2) {
+            resultAnswer.textContent = "Отдел 1 сделал больше продаж";
+        } else if (row2 > row1) {
+            resultAnswer.textContent = "Отдел 2 сделал больше продаж";
+        } else {
+            resultAnswer.textContent = "Продажи равны";
+        }
+
     </script>
 </body>
+
 </html>
